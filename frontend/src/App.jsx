@@ -37,7 +37,7 @@ function App() {
             <br />
             <br />
             <p>You entered: {businessName}</p>
-
+            <br />
             <label>Business Type</label>
             <br />
 
