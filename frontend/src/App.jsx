@@ -1,20 +1,55 @@
+import { useState } from "react";
+
+
 function App() {
+  const [page, setPage] = useState("dashboard");
+  const [businessName, setBusinessName] = useState("");
   return (
     <div style={{display: "flex", height: "100vh"}}>
 
       {/* sidebar */}
       <div style={{width: "200px", backgroundColor: "#222", color: "white", padding: "20px"}}>
         <h3>HCPA-Clone</h3>
-        <p>Dashboard</p>
-        <p>Businesses</p>
+        <p style={{cursor: "pointer"}} onClick={() => setPage("dashboard")}>
+          Dashboard
+        </p>
+        <p style={{cursor: "pointer"}} onClick={() => setPage("setup")}>
+          Business Setup
+        </p>
         <p>Settings</p>
       </div>
 
       {/* Main Content */}
       <div style={{flex: 1, padding: "20px"}}>
-        <h1>Welcome to HCPA-Clone</h1>
-        <p>This is your dashboard.</p>
+        {page === "dashboard" && (
+          <div>
+            <h1>Welcome to HCPA-Clone</h1>
+            <p>This is your dashboard.</p>
+          </div>
+        )}
+      
+        {page === "setup" && (
+          <div>
+            <h1>Business Setup form</h1>
+            <label>Business Name</label>
+            <br />
+            <input type="text" value={businessName} onChange={(event) => setBusinessName(event.target.value)} />
+            <br />
+            <br />
+            <p>You entered: {businessName}</p>
+
+            <label>Business Type</label>
+            <br />
+
+            <select>
+              <option>Sole Trader</option>
+              <option>Pty Ltd</option>
+              <option>Partnernship</option>
+            </select>
+          </div>
+        )}
       </div>
+
     </div>
   );
 }
