@@ -10,7 +10,12 @@ function App() {
   const handleSubmit = () => {
     const newBusiness = {
       name: businessName,
-      type: businessType
+      type: businessType,
+      tasks: [
+        {name: "ABN Registration", completed: false},
+        {name: "GST Registration", completed: false},
+        {name: "Business Name Registration", completed: false}
+      ]
     };
 
     setBusinesses([...businesses, newBusiness]);
@@ -23,6 +28,14 @@ function App() {
 
   const handleDelete = (indexToDelete) => {
     const updatedBusinesses = businesses.filter((_, index) => index !== indexToDelete);
+    setBusinesses(updatedBusinesses);
+  };
+
+  const toggleTask = (businessIndex, taskIndex) => {
+    const updatedBusinesses = [...businesses];
+
+    updatedBusinesses[businessIndex].tasks[taskIndex].completed = !updatedBusinesses[businessIndex].tasks[taskIndex].completed;
+
     setBusinesses(updatedBusinesses);
   }
 
@@ -53,8 +66,16 @@ function App() {
             )}
 
             {businesses.map((biz, index) => (
-              <div key = {index}>
+              <div key = {index} style={{marginBottom: "20px"}}>
                 <p><strong>{biz.name}</strong> - {biz.type}</p>
+
+                {biz.tasks.map((task, taskIndex) => (
+                  <div key={taskIndex}>
+                    <input type="checkbox" checked={task.completed} onChange={() => toggleTask(index, taskIndex)}></input>
+                    {task.name}
+                  </div>
+                ))}
+
                 <button onClick={() => handleDelete(index)}>Delete</button>
               </div>
             ))}
