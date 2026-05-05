@@ -4,6 +4,7 @@ import { useState } from "react";
 function App() {
   const [page, setPage] = useState("dashboard");
   const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
   return (
     <div style={{display: "flex", height: "100vh"}}>
 
@@ -41,11 +42,15 @@ function App() {
             <label>Business Type</label>
             <br />
 
-            <select>
+            <select value={businessType} onChange={(event) => setBusinessType(event.target.value)}>
               <option>Sole Trader</option>
               <option>Pty Ltd</option>
               <option>Partnernship</option>
             </select>
+
+            <br></br>
+
+            <button>Submit</button>
           </div>
         )}
       </div>
