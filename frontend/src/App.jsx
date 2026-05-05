@@ -4,12 +4,23 @@ import { useState } from "react";
 function App() {
   const [page, setPage] = useState("dashboard");
   const [businessName, setBusinessName] = useState("");
-  const [businessType, setBusinessType] = useState("");
+  const [businessType, setBusinessType] = useState("Select an option");
+  const[businesses, setBusinesses] = useState([]);
 
   const handleSubmit = () => {
-    console.log("Business Name: ", businessName);
-    console.log("Business Type: ", businessType);
-  }
+    const newBusiness = {
+      name: businessName,
+      type: businessType
+    };
+
+    setBusinesses([...businesses, newBusiness]);
+
+    setBusinessName("");
+    setBusinessType("Select an option");
+
+    console.log("All businesses: ", [...businesses, newBusiness]);
+  };
+
   return (
     <div style={{display: "flex", height: "100vh"}}>
 
@@ -31,6 +42,16 @@ function App() {
           <div>
             <h1>Welcome to HCPA-Clone</h1>
             <p>This is your dashboard.</p>
+
+            {businesses.length === 0 && (
+              <p>No businesses added yet.</p>
+            )}
+
+            {businesses.map((biz, index) => (
+              <div key = {index}>
+                <p><strong>{biz.name}</strong> - {biz.type}</p>
+              </div>
+            ))}
           </div>
         )}
       
@@ -48,6 +69,7 @@ function App() {
             <br />
 
             <select value={businessType} onChange={(event) => setBusinessType(event.target.value)}>
+              <option>(Select an option)</option>
               <option>Sole Trader</option>
               <option>Pty Ltd</option>
               <option>Partnernship</option>
