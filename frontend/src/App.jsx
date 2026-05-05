@@ -54,6 +54,7 @@ function App() {
             </select>
 
             <br></br>
+            <br></br>
 
             <button onClick={handleSubmit}>Submit</button>
           </div>
