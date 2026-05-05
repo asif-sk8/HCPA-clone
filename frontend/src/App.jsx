@@ -5,6 +5,11 @@ function App() {
   const [page, setPage] = useState("dashboard");
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("");
+
+  const handleSubmit = () => {
+    console.log("Business Name: ", businessName);
+    console.log("Business Type: ", businessType);
+  }
   return (
     <div style={{display: "flex", height: "100vh"}}>
 
@@ -50,7 +55,7 @@ function App() {
 
             <br></br>
 
-            <button>Submit</button>
+            <button onClick={handleSubmit}>Submit</button>
           </div>
         )}
       </div>
