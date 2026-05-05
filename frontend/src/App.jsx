@@ -21,6 +21,11 @@ function App() {
     console.log("All businesses: ", [...businesses, newBusiness]);
   };
 
+  const handleDelete = (indexToDelete) => {
+    const updatedBusinesses = businesses.filter((_, index) => index !== indexToDelete);
+    setBusinesses(updatedBusinesses);
+  }
+
   return (
     <div style={{display: "flex", height: "100vh"}}>
 
@@ -50,6 +55,7 @@ function App() {
             {businesses.map((biz, index) => (
               <div key = {index}>
                 <p><strong>{biz.name}</strong> - {biz.type}</p>
+                <button onClick={() => handleDelete(index)}>Delete</button>
               </div>
             ))}
           </div>
