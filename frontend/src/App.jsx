@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const [page, setPage] = useState("dashboard");
@@ -43,16 +43,7 @@ function App() {
     <div style={{display: "flex", height: "100vh"}}>
 
       {/* sidebar */}
-      <div style={{width: "200px", backgroundColor: "#222", color: "white", padding: "20px"}}>
-        <h3>HCPA-Clone</h3>
-        <p style={{cursor: "pointer"}} onClick={() => setPage("dashboard")}>
-          Dashboard
-        </p>
-        <p style={{cursor: "pointer"}} onClick={() => setPage("setup")}>
-          Business Setup
-        </p>
-        <p>Settings</p>
-      </div>
+      <Sidebar setPage={setPage} />
 
       {/* Main Content */}
       <div style={{flex: 1, padding: "20px"}}>
