@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BusinessForm from "./components/BusinessForm";
 import Dashboard from "./components/Dashboard";
 import Sidebar from "./components/Sidebar";
@@ -7,7 +7,13 @@ function App() {
   const [page, setPage] = useState("dashboard");
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("Select an option");
-  const[businesses, setBusinesses] = useState([]);
+  const[businesses, setBusinesses] = useState(() => {
+    const savedBusinesses = localStorage.getItem("businesses");
+
+    return savedBusinesses
+      ? JSON.parse(savedBusinesses)
+      : [];
+  });
 
   const handleSubmit = () => {
     const newBusiness = {
@@ -40,6 +46,11 @@ function App() {
 
     setBusinesses(updatedBusinesses);
   }
+
+  useEffect(() => {
+    localStorage.setItem("businesses", JSON.stringify(businesses));
+
+  }, [businesses]);
 
   return (
     <div style={{display: "flex", height: "100vh"}}>
